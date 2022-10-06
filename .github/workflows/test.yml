@@ -1,6 +1,88 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - 'main'
+      
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: sebastienmouret
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: user/app:latest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 name: node checks
 
 on: [push]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 jobs:
   build:
@@ -10,7 +92,5 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm test
       - name: Build and push Docker images
         uses: docker/build-push-action@v3.1.1
